@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<!-- PART A: Layout-->  
+
+<body>
+
+    <div id='d1' style="position:absolute; top:20px; left:10px">  
+        <canvas id='canvas1' width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    <div id='d2' style="position:absolute; top:20px; left:120px">
+        <canvas id='canvas2' width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    <div id='d3' style="position:absolute; top:20px; left:230px">
+        <canvas id='canvas3' width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    
+    <div id='d4' style="position:absolute; top:130px; left:10px">
+        <canvas id='canvas4' width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    
+    <div id='d5' style="position:absolute; top:240px; left:10px">
+        <canvas id='canvas5' width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    
+    <div id='d6' style="position:absolute; top:240px; left:120px">
+        <canvas width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    
+    <div id='d7' style="position:absolute; top:240px; left:230px">
+        <canvas width='100' height='100' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+    
+    <div id='d4' style="position:absolute; top:8px; left:318px">
+        <canvas id='glint' width='24' height='24' style="border:1px solid #000000;">
+              Your browser does not support HTML5 Canvas.
+        </canvas>
+    </div>
+
+
+<!-- PART B JavaScript-->  
+<script>
+var	myNodelist = document.getElementsByTagName("canvas");
+var glintNode = document.getElementById("glint");
+
+// default color of the glint is green
+changeColor(glintNode, "green");
+
+var arrayOrdering = new Array(); // array to keep track of the order colored
+
+//ignore the glint which is the last element in the canvas list and color the rest with blue
+for (i = 0; i <	myNodelist.length-1; i++) {
+       myNodelist[i].onclick = function(){changeColor(this, "blue")};
+       myNodelist[i].addEventListener("click", function(){clickTracker()});
+}
+
+// Handy function to change color and to maintain the order of box color events
+function changeColor(){
+
+   if(arguments.length == 2){
+     
+      // ignore the event of coloring the glint and 
+      // make sure to collect valid color change events in which case,
+      // previous color of the box is not equal to the new color
+      if(arguments[0].id!="glint" && arguments[0].style.backgroundColor != arguments[1]){
+        arrayOrdering.push(arguments[0]);
+        //alert(arrayOrdering.length);
+      }  
+        
+      //apply the color change requested
+      arguments[0].style.backgroundColor = arguments[1]; 
+   }
+}
+
+
+function doSetTimeout(i) {
+  if(i >= arrayOrdering.length) // only used to reset the layout
+    setTimeout(function() { reset(); }, (i+1)*1000);
+  else
+    setTimeout(function() { changeColor(arrayOrdering[i], "white"); }, (i+1)*1000);  
+}
+
+// for every event, check if you can start uncoloring
+function clickTracker(){
+
+   // only if 7 valid events (of color change) occurred, start undoing
+   if(arrayOrdering.length == 7){
+     //disable onclick events while uncoloring
+     for (i = 0; i <	myNodelist.length-1; i++) {
+       myNodelist[i].onclick = '';
+     }
+   
+     // color glint with red
+     changeColor(glintNode, "red");
+     
+     //reverse the order in which clicked
+     arrayOrdering.reverse();
+     
+     //set the timer to change color on each box
+     for (i = 0; i < arrayOrdering.length ; i++) {
+        doSetTimeout(i);
+     }
+     
+     //force reset at the end
+     doSetTimeout(arrayOrdering.length);
+
+   }  
+}
+
+//resets the layout
+function reset(){
+   //arrayOrdering = [];
+   //changeColor(glintNode, "green");
+   location.reload();
+}
+
+</script>
+
+</body>
+
+</html>

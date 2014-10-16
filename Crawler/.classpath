@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="/Users/Akella/Desktop/Dropbox/Interview/Code/Power/Eclipse/WebCrawler/jsoup-1.7.3.jar"/>
+	<classpathentry kind="lib" path="/Users/Akella/Desktop/Dropbox/Interview/Code/Power/Eclipse/WebCrawler/mysql-connector-java-5.1.29-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
