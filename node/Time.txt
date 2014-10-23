@@ -1,0 +1,8 @@
+10/21/ 3:00-4:30 PM: Setup node on my machine and researched required modules for database connectivity and HTML parsing
+10/22  3:00-5:00 PM: Major part of coding was performed
+10/22  7:00- 10:00 PM: Fixed bugs and tried to search the content based on key work.
+
+TODO:
+1) Fix bug with inserting same url multiple times (due to async callbacks of the recursive function)
+2) process page based on key word count
+3) Get Time modified 
